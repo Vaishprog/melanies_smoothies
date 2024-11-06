@@ -9,7 +9,7 @@ st.write(
     Choose the fruits you want in your custom smoothie.
     """
 )
-from snowflake.snowpark.functions import col
+#from snowflake.snowpark.functions import col
 cnx=st.connection("snowflake")
 session=cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
