@@ -19,9 +19,9 @@ st.write('the current movie title is',title)
 cnx=st.connection("snowflake")
 session=cnx.session()
 
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'),col('SEARCH_ON'))
 st.dataframe(data=my_dataframe, use_container_width=True)
-
+pd_df=my_dataframe.to_pandas()
 ingredients_list=st.multiselect('Choose up to 5 ingredients:',my_dataframe, max_selections=5 )
 
 if ingredients_list:
@@ -29,7 +29,13 @@ if ingredients_list:
     st.text(ingredients_list)
     ingredients_string=''
     for  x in ingredients_list:
-        ingredients_string += x
+        ingredients_string += x + ' '
+        search_on=pd_df.loc[pd_df['FRUIT_NAME'] == x, 'SEARCH_ON'].iloc[0]
+        st.write('The search value for ', x,' is ', search_on, '.')
+        st.subheader(x+ 'Nutrition information')
+        fruityvice_response=request.get("https://fruityvice.com/api/fruit/"+ x)
+
+    
     st.write(ingredients_string)
     my_insert_stmt = """ insert into smoothies.public.orders(name_on_order,ingredients)
             values ('"""+title+"""','"""+ingredients_string+"""')"""
