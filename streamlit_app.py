@@ -1,4 +1,4 @@
-'''# Import python packages
+# Import python packages
 import streamlit as st
 import requests
 
@@ -41,7 +41,7 @@ if ingredients_list:
 
         '''
 
-import streamlit as st
+ streamlit as st
 import requests
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
@@ -53,7 +53,7 @@ st.write(
     """
 )
 
-'''title=st.text_input('Name on Smothie')
+title=st.text_input('Name on Smothie')
 st.write('the current movie title is',title)
 #st.text(fruityvice_response.json())
 cnx=st.connection("snowflake")
@@ -80,7 +80,7 @@ if ingredients_list:
         time_to_insert=st.button('Submit Order')
         if time_to_insert:
             session.sql(my_insert_stmt).collect()
-            st.success('Your Smoothie is ordered!', icon="✅")'''
+            st.success('Your Smoothie is ordered!', icon="✅")
 
 title=st.text_input('Name on Smothie')
 st.write('the current movie title is',title)
@@ -112,5 +112,5 @@ if ingredients_list:
         time_to_insert=st.button('Submit Order')
         if time_to_insert:
             session.sql(my_insert_stmt).collect()
-            st.success('Your Smoothie is ordered!', icon="✅")
+            st.success('Your Smoothie is ordered!', icon="✅")'''
 
